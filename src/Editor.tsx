@@ -46,6 +46,9 @@ const TOOLS = {
   },
 };
 
+// Initial content - empty object will create default paragraph
+const INITIAL_VALUE: YooptaContentValue = {};
+
 const EDITOR_STYLES = {
   width: '100%',
   maxWidth: 850,
@@ -70,6 +73,7 @@ export default function Editor() {
       plugins={PLUGINS}
       marks={MARKS}
       tools={TOOLS}
+      value={INITIAL_VALUE}
       autoFocus
       placeholder="Type / to open menu or start typing..."
       onChange={handleChange}
