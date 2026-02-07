@@ -1,0 +1,40 @@
+{
+  "name": "yoopta-editor-demo",
+  "version": "1.0.0",
+  "description": "Yoopta Editor implementation with latest stable version",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "slate": "^0.103.0",
+    "slate-react": "^0.110.3",
+    "slate-dom": "^0.110.3",
+    "@yoopta/editor": "^6.0.0-beta.19",
+    "@yoopta/ui": "^6.0.0-beta.19",
+    "@yoopta/paragraph": "^6.0.0-beta.19",
+    "@yoopta/headings": "^6.0.0-beta.19",
+    "@yoopta/lists": "^6.0.0-beta.19",
+    "@yoopta/blockquote": "^6.0.0-beta.19",
+    "@yoopta/code": "^6.0.0-beta.19",
+    "@yoopta/callout": "^6.0.0-beta.19",
+    "@yoopta/divider": "^6.0.0-beta.19",
+    "@yoopta/image": "^6.0.0-beta.19",
+    "@yoopta/video": "^6.0.0-beta.19",
+    "@yoopta/file": "^6.0.0-beta.19",
+    "@yoopta/link": "^6.0.0-beta.19",
+    "@yoopta/marks": "^6.0.0-beta.19",
+    "@yoopta/themes-shadcn": "^6.0.0-beta.19"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  }
+}
