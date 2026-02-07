@@ -1,6 +1,5 @@
-import { useMemo, useState, useRef } from 'react';
-import YooptaEditor, { createYooptaEditor, Blocks, Marks, useYooptaEditor, type YooptaContentValue } from '@yoopta/editor';
-import { FloatingToolbar, FloatingBlockActions, BlockOptions, SlashCommandMenu } from '@yoopta/ui';
+import { useMemo } from 'react';
+import YooptaEditor, { createYooptaEditor, type YooptaContentValue } from '@yoopta/editor';
 import Paragraph from '@yoopta/paragraph';
 import Blockquote from '@yoopta/blockquote';
 import Headings from '@yoopta/headings';
@@ -12,16 +11,11 @@ import Image from '@yoopta/image';
 import Video from '@yoopta/video';
 import File from '@yoopta/file';
 import Link from '@yoopta/link';
+import ActionMenuList, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
+import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 import { Bold, Italic, Underline, Strike, CodeMark, Highlight } from '@yoopta/marks';
-import { applyTheme } from '@yoopta/themes-shadcn';
 
-// Import Yoopta styles
-import '@yoopta/editor/dist/index.css';
-import '@yoopta/ui/dist/index.css';
-import '@yoopta/themes-shadcn/dist/index.css';
-
-// Apply theme to plugins
-const plugins = applyTheme([
+const PLUGINS = [
   Paragraph,
   Headings.HeadingOne,
   Headings.HeadingTwo,
@@ -37,11 +31,20 @@ const plugins = applyTheme([
   Video,
   File,
   Link,
-]);
+];
 
 const MARKS = [Bold, Italic, Underline, Strike, CodeMark, Highlight];
 
-const initialValue: YooptaContentValue = {};
+const TOOLS = {
+  ActionMenu: {
+    render: DefaultActionMenuRender,
+    tool: ActionMenuList,
+  },
+  Toolbar: {
+    render: DefaultToolbarRender,
+    tool: Toolbar,
+  },
+};
 
 const EDITOR_STYLES = {
   width: '100%',
@@ -54,110 +57,8 @@ const EDITOR_STYLES = {
   minHeight: 'calc(100vh - 100px)',
 };
 
-// Floating toolbar component
-function MyToolbar() {
-  const editor = useYooptaEditor();
-
-  return (
-    <FloatingToolbar>
-      <FloatingToolbar.Content>
-        <FloatingToolbar.Group>
-          {editor.formats.bold && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'bold' })}
-              active={Marks.isActive(editor, { type: 'bold' })}>
-              <strong>B</strong>
-            </FloatingToolbar.Button>
-          )}
-          {editor.formats.italic && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'italic' })}
-              active={Marks.isActive(editor, { type: 'italic' })}>
-              <em>I</em>
-            </FloatingToolbar.Button>
-          )}
-          {editor.formats.underline && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'underline' })}
-              active={Marks.isActive(editor, { type: 'underline' })}>
-              <u>U</u>
-            </FloatingToolbar.Button>
-          )}
-          {editor.formats.strike && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'strike' })}
-              active={Marks.isActive(editor, { type: 'strike' })}>
-              <s>S</s>
-            </FloatingToolbar.Button>
-          )}
-          {editor.formats.code && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'code' })}
-              active={Marks.isActive(editor, { type: 'code' })}>
-              <code>{'</>'}</code>
-            </FloatingToolbar.Button>
-          )}
-          {editor.formats.highlight && (
-            <FloatingToolbar.Button
-              onClick={() => Marks.toggle(editor, { type: 'highlight' })}
-              active={Marks.isActive(editor, { type: 'highlight' })}>
-              Hi
-            </FloatingToolbar.Button>
-          )}
-        </FloatingToolbar.Group>
-      </FloatingToolbar.Content>
-    </FloatingToolbar>
-  );
-}
-
-// Floating block actions component
-function MyFloatingBlockActions() {
-  const editor = useYooptaEditor();
-  const [blockOptionsOpen, setBlockOptionsOpen] = useState(false);
-  const dragHandleRef = useRef<HTMLButtonElement>(null);
-
-  return (
-    <FloatingBlockActions frozen={blockOptionsOpen}>
-      {({ blockId }) => (
-        <>
-          <FloatingBlockActions.Button
-            onClick={() => {
-              if (!blockId) return;
-              const block = Blocks.getBlock(editor, { id: blockId });
-              if (block) editor.insertBlock('Paragraph', { at: block.meta.order + 1, focus: true });
-            }}>
-            +
-          </FloatingBlockActions.Button>
-          <FloatingBlockActions.Button
-            ref={dragHandleRef}
-            onClick={() => setBlockOptionsOpen(true)}>
-            ⋮⋮
-          </FloatingBlockActions.Button>
-
-          <BlockOptions
-            open={blockOptionsOpen}
-            onOpenChange={setBlockOptionsOpen}
-            anchor={dragHandleRef.current}>
-            <BlockOptions.Content>
-              {/* Block options menu items will be rendered automatically */}
-            </BlockOptions.Content>
-          </BlockOptions>
-        </>
-      )}
-    </FloatingBlockActions>
-  );
-}
-
 export default function Editor() {
-  const editor = useMemo(
-    () =>
-      createYooptaEditor({
-        plugins,
-        marks: MARKS,
-        value: initialValue,
-      }),
-    [],
-  );
+  const editor = useMemo(() => createYooptaEditor(), []);
 
   const handleChange = (value: YooptaContentValue) => {
     console.log('Editor value changed:', value);
@@ -166,13 +67,13 @@ export default function Editor() {
   return (
     <YooptaEditor
       editor={editor}
+      plugins={PLUGINS}
+      marks={MARKS}
+      tools={TOOLS}
       autoFocus
       placeholder="Type / to open menu or start typing..."
       onChange={handleChange}
-      style={EDITOR_STYLES}>
-      <MyToolbar />
-      <MyFloatingBlockActions />
-      <SlashCommandMenu />
-    </YooptaEditor>
+      style={EDITOR_STYLES}
+    />
   );
 }
