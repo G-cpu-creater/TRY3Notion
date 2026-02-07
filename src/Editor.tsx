@@ -57,7 +57,9 @@ const EDITOR_STYLES = {
   backgroundColor: 'white',
   borderRadius: '8px',
   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-  minHeight: 'calc(100vh - 100px)',
+  minHeight: '500px',
+  border: '1px solid #e0e0e0',
+  cursor: 'text',
 };
 
 export default function Editor() {
@@ -68,16 +70,18 @@ export default function Editor() {
   };
 
   return (
-    <YooptaEditor
-      editor={editor}
-      plugins={PLUGINS}
-      marks={MARKS}
-      tools={TOOLS}
-      value={INITIAL_VALUE}
-      autoFocus
-      placeholder="Type / to open menu or start typing..."
-      onChange={handleChange}
-      style={EDITOR_STYLES}
-    />
+    <div className="yoopta-editor">
+      <YooptaEditor
+        editor={editor}
+        plugins={PLUGINS}
+        marks={MARKS}
+        tools={TOOLS}
+        value={INITIAL_VALUE}
+        autoFocus
+        placeholder="Type / to open menu or start typing..."
+        onChange={handleChange}
+        style={EDITOR_STYLES}
+      />
+    </div>
   );
 }

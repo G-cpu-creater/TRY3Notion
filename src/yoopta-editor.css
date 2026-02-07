@@ -1,0 +1,323 @@
+/* Yoopta Editor Styles for v4 */
+
+/* Editor Container */
+.yoopta-editor {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+/* Slate Editor */
+[data-slate-editor] {
+  outline: none;
+  min-height: 200px;
+}
+
+/* Blocks */
+.yoopta-block {
+  position: relative;
+  margin-bottom: 2px;
+}
+
+/* Paragraph */
+.yoopta-paragraph,
+[data-block-type="Paragraph"] {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #1a1a1a;
+  margin: 4px 0;
+  padding: 3px 2px;
+}
+
+/* Headings */
+.yoopta-heading-one,
+[data-block-type="HeadingOne"] {
+  font-size: 2.25em;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1em 0 0.5em;
+  color: #1a1a1a;
+}
+
+.yoopta-heading-two,
+[data-block-type="HeadingTwo"] {
+  font-size: 1.875em;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0.9em 0 0.4em;
+  color: #1a1a1a;
+}
+
+.yoopta-heading-three,
+[data-block-type="HeadingThree"] {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0.8em 0 0.3em;
+  color: #1a1a1a;
+}
+
+/* Blockquote */
+.yoopta-blockquote,
+[data-block-type="Blockquote"] {
+  border-left: 4px solid #e0e0e0;
+  padding-left: 16px;
+  margin: 16px 0;
+  color: #666;
+  font-style: italic;
+}
+
+/* Lists */
+.yoopta-bulleted-list,
+[data-block-type="BulletedList"] {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.yoopta-numbered-list,
+[data-block-type="NumberedList"] {
+  list-style-type: decimal;
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.yoopta-todo-list,
+[data-block-type="TodoList"] {
+  list-style-type: none;
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+/* Code Block */
+.yoopta-code,
+[data-block-type="Code"] {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  color: #1a1a1a;
+}
+
+/* Callout */
+.yoopta-callout,
+[data-block-type="Callout"] {
+  background-color: #f9f9f9;
+  border-left: 4px solid #3b82f6;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+
+/* Divider */
+.yoopta-divider,
+[data-block-type="Divider"] {
+  border: none;
+  border-top: 2px solid #e0e0e0;
+  margin: 24px 0;
+}
+
+/* Text Marks */
+strong,
+[data-slate-leaf] strong {
+  font-weight: 700;
+}
+
+em,
+[data-slate-leaf] em {
+  font-style: italic;
+}
+
+u,
+[data-slate-leaf] u {
+  text-decoration: underline;
+}
+
+s,
+[data-slate-leaf] s {
+  text-decoration: line-through;
+}
+
+code,
+[data-slate-leaf] code {
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  color: #d63384;
+}
+
+mark,
+[data-slate-leaf] mark {
+  background-color: #fff59d;
+  padding: 2px 0;
+}
+
+/* Links */
+a,
+[data-slate-inline="link"] {
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:hover,
+[data-slate-inline="link"]:hover {
+  color: #2563eb;
+}
+
+/* Placeholder */
+[data-slate-placeholder] {
+  color: #9ca3af;
+  opacity: 1;
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+}
+
+/* Toolbar */
+.yoopta-toolbar {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 2px;
+}
+
+.yoopta-toolbar button {
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #4b5563;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+.yoopta-toolbar button:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.yoopta-toolbar button[data-active="true"],
+.yoopta-toolbar button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Action Menu */
+.yoopta-action-menu {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 400px;
+  overflow-y: auto;
+  min-width: 280px;
+}
+
+.yoopta-action-menu-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.15s;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.yoopta-action-menu-item:hover,
+.yoopta-action-menu-item:focus {
+  background-color: #f3f4f6;
+  outline: none;
+}
+
+.yoopta-action-menu-item.selected {
+  background-color: #eff6ff;
+}
+
+/* Selection */
+[data-slate-editor] ::selection {
+  background-color: #bfdbfe;
+}
+
+/* Focus */
+[contenteditable]:focus {
+  outline: none;
+}
+
+/* Empty blocks */
+[data-slate-node="element"]:empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Ensure visibility */
+.yoopta-editor * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Block hover effects */
+.yoopta-block:hover {
+  position: relative;
+}
+
+/* Media */
+[data-block-type="Image"],
+[data-block-type="Video"],
+[data-block-type="File"] {
+  margin: 16px 0;
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Scrollbar */
+.yoopta-action-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.yoopta-action-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.yoopta-action-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.yoopta-action-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -30,6 +30,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
+}
+
+.App-main > * {
+  width: 100%;
+  max-width: 900px;
 }
 
 @media (max-width: 768px) {
