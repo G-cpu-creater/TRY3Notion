@@ -1,32 +1,31 @@
 # Yoopta Editor Demo
 
-A complete implementation of [Yoopta Editor](https://github.com/yoopta-editor/Yoopta-Editor) using the latest stable version **v6.0.0-beta.19**.
+A complete implementation of [Yoopta Editor](https://github.com/yoopta-editor/Yoopta-Editor) using the **latest stable version v4.9.9**.
+
+> **Note:** This project uses v4.9.9 (stable) instead of v6 beta due to peer dependency issues. See [PEER_DEPENDENCIES.md](PEER_DEPENDENCIES.md) for details.
 
 ## 📋 Overview
 
 This project demonstrates a fully-featured rich text editor built with:
-- **Yoopta Editor v6.0.0-beta.19** (latest stable)
+- **Yoopta Editor v4.9.9** (latest stable release)
 - React 18+ with TypeScript
 - Vite for fast development
-- Shadcn UI theme
-- 20+ block plugins
-- Text formatting marks
-- Pre-built UI components
+- Slate 0.102.0
+- Production-ready configuration
 
 ## ✨ Features
 
 - **Rich Text Editing**: Paragraphs, headings (H1, H2, H3), blockquotes
 - **Lists**: Bulleted lists, numbered lists, todo lists
 - **Media**: Images, videos, files
-- **Code Blocks**: Syntax highlighting
+- **Code Blocks**: Code syntax support
 - **Layout Components**: Callout boxes, dividers
 - **Inline Links**: Link support
 - **Text Formatting**: Bold, italic, underline, strikethrough, code, highlight
 - **UI Components**: 
-  - Floating toolbar for text formatting
-  - Slash command menu (type `/`)
-  - Block actions (add, drag, options)
-- **Themes**: Shadcn UI styled components
+  - Toolbar for text formatting
+  - Action menu (type `/`)
+- **Production Ready**: Stable v4 API, no peer dependency issues
 
 ## 🚀 Getting Started
 
@@ -89,15 +88,15 @@ npm run preview
 
 ### Core Packages
 - `@yoopta/editor` - Main editor core
-- `@yoopta/ui` - UI components (toolbar, menus, etc.)
-- `slate`, `slate-react`, `slate-dom` - Peer dependencies
+- `@yoopta/ui` - UI components (toolb (v4.9.9)
+- `slate`, `slate-react` - Peer dependencies (v0.102.0)
 
 ### Plugins
 - `@yoopta/paragraph` - Basic paragraphs
 - `@yoopta/headings` - H1, H2, H3 headings
 - `@yoopta/lists` - Bulleted, numbered, and todo lists
 - `@yoopta/blockquote` - Block quotes
-- `@yoopta/code` - Code blocks with syntax highlighting
+- `@yoopta/code` - Code blocks
 - `@yoopta/callout` - Callout/alert boxes
 - `@yoopta/divider` - Visual dividers
 - `@yoopta/image` - Image blocks
@@ -108,9 +107,9 @@ npm run preview
 ### Marks (Text Formatting)
 - `@yoopta/marks` - Bold, Italic, Underline, Strike, Code, Highlight
 
-### Theme
-- `@yoopta/themes-shadcn` - Shadcn UI styled block elements
-
+### UI Tools
+- `@yoopta/toolbar` - Text formatting toolbar
+- `@yoopta/action-menu-list` - Block insertion menu
 ## 🎯 Usage Examples
 
 ### Basic Editor Setup
@@ -120,14 +119,7 @@ The editor is initialized in `src/Editor.tsx`:
 ```tsx
 import { createYooptaEditor } from '@yoopta/editor';
 
-const editor = useMemo(
-  () =>
-    createYooptaEditor({
-      plugins,
-      marks: MARKS,
-    }),
-  [],
-);
+const editor = useMemo(() => createYooptaEditor(), []);
 ```
 
 ### Using the Editor
@@ -135,14 +127,14 @@ const editor = useMemo(
 ```tsx
 <YooptaEditor
   editor={editor}
+  plugins={PLUGINS}
+  marks={MARKS}
+  tools={TOOLS}
   autoFocus
   placeholder="Type / to open menu or start typing..."
   onChange={handleChange}
-  style={EDITOR_STYLES}>
-  <MyToolbar />
-  <MyFloatingBlockActions />
-  <SlashCommandMenu />
-</YooptaEditor>
+  style={EDITOR_STYLES}
+/>
 ```
 
 ### Keyboard Shortcuts
@@ -170,41 +162,21 @@ Then add them to the plugins array in `src/Editor.tsx`:
 
 ```tsx
 import Table from '@yoopta/table';
-import Accordion from '@yoopta/accordion';
-
-const plugins = applyTheme([
-  // ...existing plugins
-  Table,
-  Accordion,
-]);
+import Accordion froaccordion@4.9.9 @yoopta/embed@4.9.9
 ```
 
-### Changing Theme
-
-To use a different theme or no theme:
+Then add them to the plugins array in `src/Editor.tsx`:
 
 ```tsx
-// Without theme (headless)
-const plugins = [
-  Paragraph,
-  Headings.HeadingOne,
-  // ...
+import Accordion from '@yoopta/accordion';
+import Embed from '@yoopta/embed';
+
+const PLUGINS = [
+  // ...existing plugins
+  Accordion,
+  Embed,
 ];
-
-// Or import a different theme
-// import { applyTheme } from '@yoopta/themes-material';
 ```
-
-### Customizing Styles
-
-Edit `src/App.css` and `src/index.css` for custom styling, or modify the `EDITOR_STYLES` constant in `src/Editor.tsx`.
-
-## 📚 Resources
-
-- [Official Documentation](https://docs.yoopta.dev)
-- [GitHub Repository](https://github.com/yoopta-editor/Yoopta-Editor)
-- [Live Playground](https://yoopta.dev/playground)
-- [Discord Community](https://discord.gg/Dt8rhSTjsn)
 - [Examples](https://yoopta.dev/playground)
 
 ## 📄 License
